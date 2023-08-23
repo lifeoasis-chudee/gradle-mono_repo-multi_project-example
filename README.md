@@ -32,3 +32,5 @@ grpcurl --plaintext -d "{\"name\": \"Test\"}" localhost:9090 user.UserService.Ge
 ```
 
 4. graphql 어플리케이션에 접속하여 user 도메인의 데이터를 생성하거나 불러옵니다.
+
+   [http://localhost:8081/graphiql?path=/graphql](http://localhost:8081/graphiql?path=/graphql)
