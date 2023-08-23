@@ -1,0 +1,11 @@
+server:
+  port: 8081
+  shutdown: graceful
+
+spring:
+  application:
+    name: user-grpc-example
+
+grpc:
+  server:
+    port: 9090

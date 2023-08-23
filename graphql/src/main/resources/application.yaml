@@ -1,0 +1,18 @@
+spring:
+  graphql:
+    graphiql:
+      enabled: true
+    schema:
+      locations: "classpath:graphql/**/"
+      printer:
+        enabled: true
+  main:
+    allow-bean-definition-overriding: true
+
+grpc:
+  client:
+    user-grpc:
+      address: 'dns:///user-grpc:9090'
+      enableKeepAlive: true
+      keepAliveWithoutCalls: true
+      negotiationType: plaintext

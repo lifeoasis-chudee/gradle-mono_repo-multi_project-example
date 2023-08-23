@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package user;
+
+option java_multiple_files = true;
+option java_package = "com.example.proto.user";
+option java_outer_classname = "UserProto";
+
+import "google/protobuf/empty.proto";
+
+service UserService {
+  rpc CreateUser (CreateUserRequest) returns (User) {}
+  rpc ListUsers (ListUsersRequest) returns (ListUsersResponse) {}
+  rpc GetUser (GetUserRequest) returns (User) {}
+  rpc DeleteUser (DeleteUserRequest) returns (google.protobuf.Empty) {}
+  rpc UpdateUser (UpdateUserRequest) returns (User) {}
+}
+
+message CreateUserRequest {
+  User user = 1;
+}
+
+message ListUsersRequest {
+
+}
+
+message ListUsersResponse {
+  repeated User users = 1;
+}
+
+message GetUserRequest {
+  string name = 1;
+}
+
+message DeleteUserRequest {
+  string name = 1;
+}
+
+message UpdateUserRequest {
+  User user = 1;
+}
+
+message User {
+  string name = 1;
+  int32 age = 2;
+}

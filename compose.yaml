@@ -1,0 +1,51 @@
+version: "3.9"
+
+services:
+  database:
+    platform: linux/arm64
+    image: arm64v8/mysql:8.0
+    command: [
+      "mysqld",
+      "--default-authentication-plugin=mysql_native_password",
+      "--character-set-server=utf8mb4",
+      "--collation-server=utf8mb4_unicode_ci",
+    ]
+    container_name: "mysql"
+    ports:
+      - "33080:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: local
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: mysql
+    volumes:
+      - ./db/data:/var/lib/mysql
+    networks:
+      - example_monorepo_network
+
+  user:
+    image: localhost:8080/my-image/user:latest
+    restart: always
+    depends_on:
+      - database
+    ports:
+      - "8080:8080"
+      - "9090:9090"
+    container_name: user
+    hostname: user-grpc
+    networks:
+      - example_monorepo_network
+
+  graphql:
+    image: localhost:8080/my-image/graphql:latest
+    restart: always
+    depends_on:
+      - database
+    ports:
+      - "8081:8080"
+    container_name: graphql
+    networks:
+      - example_monorepo_network
+
+networks:
+  example_monorepo_network:
